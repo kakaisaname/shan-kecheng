@@ -34,3 +34,20 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+router.beforeEach(( to, from, next ) => {
+  if (!window.initUrl) {
+    window.initUrl = location.href.split('#')[0]
+  }
+  next()
+  if (to.name == 'empty') {
+    let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+    if (typeof(wechatopenid) == "undefined" || !wechatopenid) {//如果没有token,则让它授权 
+      //保存当前路由地址，授权后还会跳到此地址
+      //授权请求,并跳转http://www.hhfff.cn/oauth2.php路由页面
+      window.location.href = 'http://www.hhfff.cn/kecheng_oauth.php';
+    } else {
+
+    }
+  }
+})
