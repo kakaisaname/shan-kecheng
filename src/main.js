@@ -47,7 +47,9 @@ router.beforeEach(( to, from, next ) => {
       //授权请求,并跳转http://www.hhfff.cn/oauth2.php路由页面
       window.location.href = 'http://www.hhfff.cn/kecheng_oauth.php';
     } else {
-
+      window.location.href = 'http://www.baidu.com';
     }
+  } else {
+    next();
   }
 })
