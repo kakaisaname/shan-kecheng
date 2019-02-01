@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img :src="imgurl" alt="">
+        <img :src="imgurl" alt="" class="img">
     </div>
 </template>
 
@@ -22,21 +22,15 @@ export default {
         this.isbuy = buy;
         this.isshare = share;
         this.imgurl = imgurl;
-        console.log("buy", buy); // 输出 test message
-        console.log("share", share); // 输出 test message
-        console.log("imgurl", imgurl); // 输出 test message
-        console.log("isbuy", this.isbuy); // 输出 test message
     }
-    // methods: {  
-    //   getParams () {  
-    //     // 取到路由带过来的参数   
-        
-    //   }  
-    // },  
-    // watch: {  
-    // // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可  
-    //   '$route': 'getParams'  
-    // }
 }
 </script>
+
+<style lang="less" scoped>
+    .img{
+        width: 100%;
+        margin-bottom:100px
+    }
+</style>
+
 
