@@ -93,7 +93,6 @@ export default {
               }
           }).then((response) => {  //箭头函数，上下文穿透，才能用this.$router
               let res = response.data;
-              console.log(res)
               let res_code = res.code;
               if (res_code == '000') {
                   //跳转到课程详细页 带上参数
@@ -103,7 +102,9 @@ export default {
                     params: {   
                         isbuy: res.data.buy,   
                         isshare: res.data.share,
-                        img:img_url
+                        img: img_url,
+                        tips: res.data.kecheng.tips,
+                        vediourl: res.data.kecheng.video_url,
                     }
                   }) 
               } else if (res_code == '002') {
