@@ -87,8 +87,10 @@ export default {
           let openid = localStorage.getItem("shan_wechat_oauth_openid")
           let URL = 'http://www.hhfff.cn/api/getIsBuySharedByOpenid'    
           axios.get(URL,{
-              'openid':openid,
-              'kechengid':id
+              params:{
+                'openid':openid,
+                'kechengid':id
+              }
           }).then((response) => {  //箭头函数，上下文穿透，才能用this.$router
               let res = response.data;
               console.log(res)
