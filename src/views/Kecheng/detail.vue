@@ -1,20 +1,20 @@
 <template>
     <div>
         <div v-if="isbuy || isshare">
-            <img :src="imgurl" alt="" class="img">
-            <div class="bottom" >
-                <div class="kecheng_tips" >{{ tips }}</div>
-                <div class="lingqu" @click="showTips()" >邀请好友</div>
-                <div class="goumai" @click="buy()" >立即购买</div>      
-            </div>
-        </div>
-        <div v-else>
             <video-player  class="video-player vjs-custom-skin"
                 ref="videoPlayer"
                 :playsinline="true"
                 :options="playerOptions"
             >
             </video-player>
+        </div>
+        <div v-else>
+            <img :src="imgurl" alt="" class="img">
+            <div class="bottom" >
+                <div class="kecheng_tips" >{{ tips }}</div>
+                <div class="lingqu" @click="showTips()" >邀请好友</div>
+                <div class="goumai" @click="buy()" >立即购买</div>      
+            </div>
         </div>
     </div>
 </template>
