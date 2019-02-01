@@ -97,8 +97,15 @@ export default {
               let res_code = res.code;
               if (res_code == '000') {
                   //跳转到课程详细页 带上参数
-                  console.log(res.data);
-                  // this.$router.push('/list');
+                  this.$router.push({  
+                    path: '/detail',   
+                    name: 'detail',  
+                    params: {   
+                        isbuy: res.buy,   
+                        isshare: res.share,
+                        img:img_url
+                    }
+                  }) 
               } else if (res_code == '002') {
                   //参数有误，提示课程暂时无法观看
                   Message.error('该课程暂时无法观看,谢谢！');
