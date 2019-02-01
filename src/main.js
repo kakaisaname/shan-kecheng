@@ -49,7 +49,8 @@ router.beforeEach(( to, from, next ) => {
     } else {
       //不用授权了
       //跳转到答题页 
-      this.$router.push('/list');
+      router.push('/list');
+      // this.$router.push('/list');
     }
   } else {
     next();
