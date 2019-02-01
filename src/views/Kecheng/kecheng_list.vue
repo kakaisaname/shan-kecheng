@@ -104,7 +104,7 @@ export default {
                         isshare: res.data.share,
                         img: img_url,
                         tips: res.data.kecheng.tips,
-                        vediourl: res.data.kecheng.video_url,
+                        vediourl: res.data.kecheng.tips,
                     }
                   }) 
               } else if (res_code == '002') {
@@ -195,7 +195,7 @@ export default {
               ellipsis()
           .item-button
               border-radius 15px
-              background #ff9300
+              background green
               color   #fff
         // .item-button
             // float left
