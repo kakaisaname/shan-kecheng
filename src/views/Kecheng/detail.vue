@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name:'detail',
     data () {
@@ -28,6 +29,8 @@ export default {
             isshare: '',  
             imgurl: '', 
             tips: '',
+            openid: '',     //openid
+            kechengid: '',  //课程id
             playerOptions : {
                 playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
                 autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -59,13 +62,22 @@ export default {
         let imgurl = this.$route.params.img;
         let tips = this.$route.params.tips;
         let vediourl = this.$route.params.vediourl;
+        let openid = this.$route.params.openid;
+        let kechengid = this.$route.params.kechengid;
         // 将数据放在当前组件的数据内  
         this.isbuy = buy;
         this.isshare = share;
         this.imgurl = imgurl;
         this.tips = tips;
+        this.openid = openid;
+        this.kechengid = kechengid;
         this.playerOptions.sources[0].src = vediourl;
-    }
+    },
+    methods: {
+        showTips () {
+            
+        }
+    },
 }
 </script>
 

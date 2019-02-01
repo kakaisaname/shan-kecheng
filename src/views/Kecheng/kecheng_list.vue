@@ -105,6 +105,8 @@ export default {
                         img: img_url,
                         tips: res.data.kecheng.tips,
                         vediourl: res.data.kecheng.video_url,
+                        kechengid: id,
+                        openid: openid
                     }
                   }) 
               } else if (res_code == '002') {
