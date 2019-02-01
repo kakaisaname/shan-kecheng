@@ -14,9 +14,7 @@ export default {
             imgurl: '',  
         }  
     },
-    methods: {  
-      getParams () {  
-        // 取到路由带过来的参数   
+    mounted () {
         let buy = this.$route.params.isbuy;
         let share = this.$route.params.isshare;
         let imgurl = this.$route.params.img;
@@ -27,12 +25,17 @@ export default {
         console.log("buy", this.isbuy); // 输出 test message
         console.log("share", this.isshare); // 输出 test message
         console.log("imgurl", this.imgurl); // 输出 test message
-      }  
-    },  
-    watch: {  
-    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可  
-      '$route': 'getParams'  
     }
+    // methods: {  
+    //   getParams () {  
+    //     // 取到路由带过来的参数   
+        
+    //   }  
+    // },  
+    // watch: {  
+    // // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可  
+    //   '$route': 'getParams'  
+    // }
 }
 </script>
 
