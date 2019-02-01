@@ -38,7 +38,7 @@ export default {
                 aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
                 fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
                 sources: [{
-                type: "",
+                type: "video/mp4",
                 src: "" //url地址
                 }],
                 poster: "../../assets/img/share.jpg", //你的封面地址
@@ -58,7 +58,7 @@ export default {
         let share = this.$route.params.isshare;
         let imgurl = this.$route.params.img;
         let tips = this.$route.params.tips;
-        let vediourl = this.$route.params.video_url;
+        let vediourl = this.$route.params.vediourl;
         // 将数据放在当前组件的数据内  
         this.isbuy = buy;
         this.isshare = share;
