@@ -25,7 +25,7 @@ export default {
         console.log("buy", buy); // 输出 test message
         console.log("share", share); // 输出 test message
         console.log("imgurl", imgurl); // 输出 test message
-        console.log("isbuy", this.isbuy); // 输出 test message
+        // console.log("isbuy", this.isbuy); // 输出 test message
     }
     // methods: {  
     //   getParams () {  
