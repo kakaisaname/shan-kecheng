@@ -3,6 +3,7 @@ import './cube-ui'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VideoPlayer from 'vue-video-player'
 import {
   /* eslint-disable no-unused-vars */
   Button,
@@ -18,7 +19,9 @@ import SubscribeDialog from '@/components/subscribe-dialog/subscribe-dialog'
 // import GongzonghaoDialog from '@/components/share-dialog/gongzonghao-dialog'
 createAPI(Vue, SubscribeDialog, [], true)
 // createAPI(Vue, GongzonghaoDialog, [], true)
-
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+Vue.use(VideoPlayer)
 Vue.use(Button)
 Vue.use(Loading)
 Vue.use(Popup)
