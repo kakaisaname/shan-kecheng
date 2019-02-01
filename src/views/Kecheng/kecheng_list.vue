@@ -14,7 +14,7 @@
                   <div class="item-float">
                       <p class="item-title">{{ item.title }}</p>
                       <p class="item-desc">{{ item.desc }}</p>
-                      <button class="item-button" @click="tiaozhuan(item.img_url)">观看视频</button>
+                      <button class="item-button" @click="tiaozhuan(item.img_url,item.id)">观看视频</button>
                   </div>
                   <!-- <cube-button :light="true" :inline="true" class="item-button">查看详情</cube-button> -->
               </div>
@@ -77,12 +77,37 @@ export default {
                Message.error('暂时没有课程，请尽情期待！') 
             })
         },
-    tiaozhuan (img_url) {
+    tiaozhuan (img_url,id) {
         if (img_url.length == 0) {
           Message.success('暂时没有课程，请尽情期待！')
         } else {
           //应该是跳转到一个页面 vue 
-          window.location.href = img_url
+          // window.location.href = img_url
+          //先通过课程和openid获取是否分享和是否购买
+          let openid = localStorage.getItem("shan_wechat_oauth_openid")
+          let URL = 'http://www.hhfff.cn/api/getIsBuySharedByOpenid'    
+          axios.get(URL,{
+              'openid':openid,
+              'kechengid':id
+          }).then((response) => {  //箭头函数，上下文穿透，才能用this.$router
+              let res = response.data;
+              console.log(res)
+              let res_code = res.code;
+              if (res_code == '000') {
+                  //跳转到课程详细页 带上参数
+                  console.log(res.data);
+                  // this.$router.push('/list');
+              } else if (res_code == '002') {
+                  //参数有误，提示课程暂时无法观看
+                  Message.error('该课程暂时无法观看,谢谢！');
+                  //不跳转
+                  // this.$router.push('/fail');
+                  return false;
+              }
+          })
+          .catch((error) =>{
+              console.log(error);
+          });
         }
     },    
     subscribe () {
