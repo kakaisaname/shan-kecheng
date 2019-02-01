@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src={{ imgurl }} alt="">
+        <img :src="imgurl" alt="">
     </div>
 </template>
 
