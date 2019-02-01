@@ -22,9 +22,9 @@ export default {
         // this.isbuy = isbuy;
         // this.isshare = share;
         // this.imgurl = imgurl;
-        console.log("buy", this.isbuy); // 输出 test message
-        console.log("share", this.isshare); // 输出 test message
-        console.log("imgurl", this.imgurl); // 输出 test message
+        console.log("buy", buy); // 输出 test message
+        console.log("share", share); // 输出 test message
+        console.log("imgurl", imgurl); // 输出 test message
     }
     // methods: {  
     //   getParams () {  
