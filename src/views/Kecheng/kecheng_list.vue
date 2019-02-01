@@ -104,7 +104,7 @@ export default {
                         isshare: res.data.share,
                         img: img_url,
                         tips: res.data.kecheng.tips,
-                        vediourl: res.data.kecheng.tips,
+                        vediourl: res.data.kecheng.video_url,
                     }
                   }) 
               } else if (res_code == '002') {
