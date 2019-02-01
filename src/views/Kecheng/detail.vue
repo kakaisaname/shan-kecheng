@@ -14,17 +14,18 @@ export default {
             imgurl: '',  
         }  
     },
-    mounted () {
+    created () {
         let buy = this.$route.params.isbuy;
         let share = this.$route.params.isshare;
         let imgurl = this.$route.params.img;
         // 将数据放在当前组件的数据内  
-        // this.isbuy = isbuy;
-        // this.isshare = share;
-        // this.imgurl = imgurl;
+        this.isbuy = isbuy;
+        this.isshare = share;
+        this.imgurl = imgurl;
         console.log("buy", buy); // 输出 test message
         console.log("share", share); // 输出 test message
         console.log("imgurl", imgurl); // 输出 test message
+        console.log("isbuy", this.isbuy); // 输出 test message
     }
     // methods: {  
     //   getParams () {  

@@ -101,8 +101,8 @@ export default {
                     path: '/detail',   
                     name: 'detail',  
                     params: {   
-                        isbuy: res.buy,   
-                        isshare: res.share,
+                        isbuy: res.data.buy,   
+                        isshare: res.data.share,
                         img:img_url
                     }
                   }) 
