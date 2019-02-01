@@ -49,6 +49,7 @@ router.beforeEach(( to, from, next ) => {
     } else {
       //不用授权了
       //跳转到答题页 
+      console.log('a')
       router.push('/list');
       // this.$router.push('/list');
     }
