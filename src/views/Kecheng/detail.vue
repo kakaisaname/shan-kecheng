@@ -19,9 +19,9 @@ export default {
         let share = this.$route.params.isshare;
         let imgurl = this.$route.params.img;
         // 将数据放在当前组件的数据内  
-        this.isbuy = isbuy;
-        this.isshare = share;
-        this.imgurl = imgurl;
+        // this.isbuy = isbuy;
+        // this.isshare = share;
+        // this.imgurl = imgurl;
         console.log("buy", this.isbuy); // 输出 test message
         console.log("share", this.isshare); // 输出 test message
         console.log("imgurl", this.imgurl); // 输出 test message
