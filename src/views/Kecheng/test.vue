@@ -14,9 +14,10 @@
             </div>
         </div>
         <div class="qr" id="qr" ref="qrs">
-            <img src="https://www.shenxiaoshan.com/admin/wechat/img/haibao3/<?php echo $openid; ?>_kc_<?php echo $kecheng_id ?>.jpg" style="width:240px;display:block;margin:auto;margin-top:16px" >
+            <img :src="qrcodeImgUrlPre+qrcodeImg" style="width:240px;display:block;margin:auto;margin-top:16px" >
             <span style="display: block;margin: auto;font-size: 13px;color: #888888;">长按保存图片，3个朋友来扫码就能免费听课</span>
-            <img class="close" src="http://p91mcuvhb.bkt.clouddn.com/close.png?imageslim"  style="display: block;margin:14px auto 6px auto;width: 30px;cursor: pointer;" @click="hiddenCode()">
+            <span class="close" @click="hiddenCode"><i class="cubeic-close"></i></span>
+            <!-- <img class="close" src=""  style="display: block;margin:14px auto 6px auto;width: 30px;cursor: pointer;" @click="hiddenCode()"> -->
         </div>   
     </div>
 </template>
@@ -27,12 +28,14 @@ export default {
     name:'detail',
     data () {
         return {
+            qrcodeImgUrlPre: 'http://118.24.61.194:8089/qrcode/',
             isbuy: '',  
             isshare: '',  
             imgurl: '',
             tips:'ssss',
-            openid:'l6w0e_dqQ2FWmpfOdIuBIOhQJ0',
-            kechengid: 1 
+            openid:'o-l6w0e_dqQ2FWmpfOdIuBIOhQJ0',
+            kechengid: 1,
+            qrcodeImg:'', 
         }  
     },
     methods: {
@@ -45,26 +48,15 @@ export default {
         },
         showCode () {
             //去生成 带参的二维码图片
-            
             this.$refs.qrs.style.display="inline"
         },
         hiddenCode () {
             this.$refs.qrs.style.display="none"
-        },
-        createImage (openid,kechengid) {     //主要就是生成带参的图片
-        let createImageUrl = 'http://www.hhfff.cn/api/createQrImage'
-            axios.post(createImageUrl,{
-                openid:openid,
-                kechengid:kechengid
-            })
-            .then((response) => {
-                
-            })
-            .catch((error) =>{
-              console.log(error);
-            });
-        
         }
+    },
+    mounted () {
+        this.qrcodeImg = this.openid+'.jpg'
+        //进来就去生成图片
     }
 }
 </script>
