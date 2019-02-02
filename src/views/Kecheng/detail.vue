@@ -79,23 +79,23 @@ export default {
         let openid = this.$route.params.openid;
         let kechengid = this.$route.params.kechengid;
 
-        sessionStorage.setItem('shan_buy',buy)
-        sessionStorage.setItem('shan_share',share)
-        sessionStorage.setItem('shan_imgurl',imgurl)
-        sessionStorage.setItem('shan_tips',tips)
-        sessionStorage.setItem('shan_vediourl',vediourl)
-        sessionStorage.setItem('shan_openid',openid)
-        sessionStorage.setItem('shan_kechengid',kechengid)
+        localStorage.setItem('shan_buy',buy)
+        localStorage.setItem('shan_share',share)
+        localStorage.setItem('shan_imgurl',imgurl)
+        localStorage.setItem('shan_tips',tips)
+        localStorage.setItem('shan_vediourl',vediourl)
+        localStorage.setItem('shan_openid',openid)
+        localStorage.setItem('shan_kechengid',kechengid)
         // 将数据放在当前组件的数据内
 
-        this.isbuy = sessionStorage.getItem('shan_buy');
-        this.isshare = sessionStorage.getItem('shan_share');
-        this.imgurl = sessionStorage.getItem('shan_imgurl');
-        this.tips = sessionStorage.getItem('shan_tips');
-        this.openid = sessionStorage.getItem('shan_openid');
-        this.kechengid = sessionStorage.getItem('shan_kechengid');
+        this.isbuy = localStorage.getItem('shan_buy');
+        this.isshare = localStorage.getItem('shan_share');
+        this.imgurl = localStorage.getItem('shan_imgurl');
+        this.tips = localStorage.getItem('shan_tips');
+        this.openid = localStorage.getItem('shan_openid');
+        this.kechengid = localStorage.getItem('shan_kechengid');
         this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'.jpg';
-        this.playerOptions.sources[0].src = sessionStorage.getItem('shan_vediourl',vediourl);
+        this.playerOptions.sources[0].src = localStorage.getItem('shan_vediourl',vediourl);
     },
     methods: {
         showTips () {
