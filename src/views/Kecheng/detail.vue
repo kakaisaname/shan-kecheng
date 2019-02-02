@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isbuy || isshare">
+        <div v-if="isbuy !=0 || isshare !=0">
             <video-player  class="video-player vjs-custom-skin"
                 ref="videoPlayer"
                 :playsinline="true"

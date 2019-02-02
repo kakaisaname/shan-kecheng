@@ -1,24 +1,21 @@
 <template>
     <div>
-        <img src="http://zhou55.cn/00000001.jpg" alt="" class="img">
-        <div class="bottom" >
-             <div class="kecheng_tips" >{{ tips }}</div>
-             <div class="lingqu" @click="showTips()" >邀请好友</div>
-             <div class="goumai" @click="buy()" >立即购买</div>         
-         </div>
-         <div class="tips" id="tips" ref="share">
-            <div style="margin:auto;width:70%;height:170px;background-color:white;margin-top:136px;border-radius:6px;overflow:hidden;text-align:center;">
-            <div style="width:100%;background-color:#4c86f4;height:40px;line-height:40px;color:white">邀请好友</div>
-            <span style="display: block;margin: auto;font-size: 13px;color: #888888;padding-top:20px;padding-left:8px;padding-right:8px">本课程现可通过邀请<span style="color:#4c86f4">3</span>个好友，获得<span style="color:#4c86f4">免费</span>学习资格，快去分享自己的邀请卡吧～</span>
-            <div style="test-align:center;width:50%;border-radius:20px;margin:auto;background-color:#4c86f4;color:white;height:40px;line-height:40px;margin-top:24px" @click="hiddenTips()">生成邀请卡</div>
-            </div>
+        <div v-if="isbuy !=0 || isshare !=0">
+            <video-player  class="video-player vjs-custom-skin"
+                ref="videoPlayer"
+                :playsinline="true"
+                :options="playerOptions"
+            >
+            </video-player>
         </div>
-        <div class="qr" id="qr" ref="qrs">
-            <img :src="qrcodeImgUrlPre+qrcodeImg" style="width:240px;display:block;margin:auto;margin-top:16px" >
-            <span style="display: block;margin: auto;font-size: 13px;color: #888888;">长按保存图片，3个朋友来扫码就能免费听课</span>
-            <span class="close" @click="hiddenCode"><i class="cubeic-close"></i></span>
-            <!-- <img class="close" src=""  style="display: block;margin:14px auto 6px auto;width: 30px;cursor: pointer;" @click="hiddenCode()"> -->
-        </div>   
+        <div v-else>
+           <img :src="imgurl" alt="" class="img">
+            <div class="bottom" >
+                <div class="kecheng_tips" >{{ tips }}</div>
+                <div class="lingqu" @click="showTips()" >邀请好友</div>
+                <div class="goumai" @click="buy()" >立即购买</div>      
+            </div> 
+        </div> 
     </div>
 </template>
 
@@ -27,16 +24,65 @@ import axios from 'axios'
 export default {
     name:'detail',
     data () {
-        return {
-            qrcodeImgUrlPre: 'http://118.24.61.194:8089/qrcode/',
+        return {  
             isbuy: '',  
             isshare: '',  
-            imgurl: '',
-            tips:'ssss',
-            openid:'o-l6w0e_dqQ2FWmpfOdIuBIOhQJ0',
-            kechengid: 1,
+            imgurl: '', 
+            tips: '',
+            openid: '',     //openid
+            kechengid: '',  //课程id
             qrcodeImg:'', 
+            playerOptions : {
+                playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+                autoplay: false, //如果true,浏览器准备好时开始回放。
+                muted: false, // 默认情况下将会消除任何音频。
+                loop: false, // 导致视频一结束就重新开始。
+                preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+                language: 'zh-CN',
+                aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+                fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+                sources: [{
+                type: "video/mp4",
+                src: "" //url地址
+                }],
+                poster: "../../assets/img/share.jpg", //你的封面地址
+                // width: document.documentElement.clientWidth,
+                notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+                controlBar: {
+                    timeDivider: true,
+                    durationDisplay: true,
+                    remainingTimeDisplay: false,
+                    fullscreenToggle: true  //全屏按钮
+                }
+            }
         }  
+    },
+    created () {
+        let buy = 0;
+        let share = 0;
+        let imgurl = '';
+        let tips = 'ds';
+        let vediourl = '';
+        let openid = 'o-l6w0e_dqQ2FWmpfOdIuBIOhQJ0';
+        let kechengid = 1;
+
+        sessionStorage.setItem('shan_buy',buy)
+        sessionStorage.setItem('shan_share',share)
+        sessionStorage.setItem('shan_imgurl',imgurl)
+        sessionStorage.setItem('shan_tips',tips)
+        sessionStorage.setItem('shan_vediourl',vediourl)
+        sessionStorage.setItem('shan_openid',openid)
+        sessionStorage.setItem('shan_kechengid',kechengid)
+        // 将数据放在当前组件的数据内
+
+        this.isbuy = sessionStorage.getItem('shan_buy');
+        this.isshare = sessionStorage.getItem('shan_share');
+        this.imgurl = sessionStorage.getItem('shan_imgurl');
+        this.tips = sessionStorage.getItem('shan_tips');
+        this.openid = sessionStorage.getItem('shan_openid');
+        this.kechengid = sessionStorage.getItem('shan_kechengid');
+        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'.jpg';
+        this.playerOptions.sources[0].src = sessionStorage.getItem('shan_vediourl',vediourl);
     },
     methods: {
         showTips () {
@@ -53,10 +99,6 @@ export default {
         hiddenCode () {
             this.$refs.qrs.style.display="none"
         }
-    },
-    mounted () {
-        this.qrcodeImg = this.openid+'.jpg'
-        //进来就去生成图片
     }
 }
 </script>
