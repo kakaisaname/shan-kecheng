@@ -94,7 +94,7 @@ export default {
         this.tips = localStorage.getItem('shan_tips');
         this.openid = localStorage.getItem('shan_openid');
         this.kechengid = localStorage.getItem('shan_kechengid');
-        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'.jpg';
+        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'_'+this.kechengid+'.jpg';
         this.playerOptions.sources[0].src = localStorage.getItem('shan_vediourl',vediourl);
     },
     methods: {
@@ -103,7 +103,10 @@ export default {
         },
         hiddenTips () {
             this.$refs.share.style.display="none";
-            this.showCode()
+            //也是过两秒才跳转
+            setTimeout(()=>{
+                this.showCode()
+            },3000)
         },
         showCode () {
             //去生成 带参的二维码图片
