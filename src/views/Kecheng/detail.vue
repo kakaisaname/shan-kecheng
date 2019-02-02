@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="qr" id="qr" ref="qrs">
-            <img :src="qrcodeImgUrlPre+qrcodeImg" style="width:240px;display:block;margin:auto;margin-top:16px" >
+            <img :src="qrcodeImg" style="width:240px;display:block;margin:auto;margin-top:16px" >
             <span style="display: block;margin: auto;font-size: 13px;color: #888888;">长按保存图片，3个朋友来扫码就能免费听课</span>
             <span class="close" @click="hiddenCode"><i class="cubeic-close"></i></span>
             <!-- <img class="close" src=""  style="display: block;margin:14px auto 6px auto;width: 30px;cursor: pointer;" @click="hiddenCode()"> -->
@@ -38,7 +38,6 @@ export default {
     name:'detail',
     data () {
         return {  
-            qrcodeImgUrlPre: 'http://118.24.61.194:8089/qrcode/',
             isbuy: '',  
             isshare: '',  
             imgurl: '', 
@@ -86,6 +85,7 @@ export default {
         this.tips = tips;
         this.openid = openid;
         this.kechengid = kechengid;
+        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+openid+'.jpg';
         this.playerOptions.sources[0].src = vediourl;
     },
     methods: {
@@ -103,10 +103,6 @@ export default {
         hiddenCode () {
             this.$refs.qrs.style.display="none"
         }
-    },
-    mounted () {
-        this.qrcodeImg = this.openid+'.jpg'
-        //进来就去生成图片
     }
 }
 </script>
