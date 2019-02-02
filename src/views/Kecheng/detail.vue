@@ -78,15 +78,24 @@ export default {
         let vediourl = this.$route.params.vediourl;
         let openid = this.$route.params.openid;
         let kechengid = this.$route.params.kechengid;
-        // 将数据放在当前组件的数据内  
-        this.isbuy = buy;
-        this.isshare = share;
-        this.imgurl = imgurl;
-        this.tips = tips;
-        this.openid = openid;
-        this.kechengid = kechengid;
-        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+openid+'.jpg';
-        this.playerOptions.sources[0].src = vediourl;
+
+        sessionStorage.setItem('shan_buy',buy)
+        sessionStorage.setItem('shan_share',share)
+        sessionStorage.setItem('shan_imgurl',imgurl)
+        sessionStorage.setItem('shan_tips',tips)
+        sessionStorage.setItem('shan_vediourl',vediourl)
+        sessionStorage.setItem('shan_openid',openid)
+        sessionStorage.setItem('shan_kechengid',kechengid)
+        // 将数据放在当前组件的数据内
+
+        this.isbuy = sessionStorage.getItem('shan_buy');
+        this.isshare = sessionStorage.getItem('shan_share');
+        this.imgurl = sessionStorage.getItem('shan_imgurl');
+        this.tips = sessionStorage.getItem('shan_tips');
+        this.openid = sessionStorage.getItem('shan_openid');
+        this.kechengid = sessionStorage.getItem('shan_kechengid');
+        this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'.jpg';
+        this.playerOptions.sources[0].src = sessionStorage.getItem('shan_vediourl',vediourl);
     },
     methods: {
         showTips () {
