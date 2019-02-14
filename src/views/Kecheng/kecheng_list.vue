@@ -97,8 +97,23 @@ export default {
               if (res_code == '000') {
                   //跳转到课程详细页 带上参数
                   //过几秒跳转   可能还没生成分享的图片 *** （邀请好友生成图片费时间）
-                  setTimeout(()=>{
-					            this.$router.push({  
+                  // setTimeout(()=>{
+					        //     this.$router.push({  
+                  //       path: '/detail',   
+                  //       name: 'detail',  
+                  //       params: {   
+                  //           isbuy: res.data.buy,   
+                  //           isshare: res.data.share,
+                  //           img: img_url,
+                  //           tips: res.data.kecheng.tips,
+                  //           vediourl: res.data.kecheng.video_url,
+                  //           kechengid: id,
+                  //           openid: openid
+                  //       }
+                  // }) 
+                  // },2000)
+                  //算了，这样用户体验不好，没生成分享图片的话自己去查有没有，没有二维码的话提示过段时间来分享
+                  this.$router.push({  
                         path: '/detail',   
                         name: 'detail',  
                         params: {   
@@ -110,8 +125,7 @@ export default {
                             kechengid: id,
                             openid: openid
                         }
-                  }) 
-				          },2000)
+                  })
               } else if (res_code == '002') {
                   //参数有误，提示课程暂时无法观看
                   Message.error('该课程暂时无法观看,谢谢！');

@@ -101,12 +101,39 @@ export default {
         showTips () {
             this.$refs.share.style.display="inline";
         },
+        //邀请好友的二维码，可能二维码的生成时间比较久，所以如果没有二维码图片的话，提示稍后邀请
         hiddenTips () {
             this.$refs.share.style.display="none";
             //也是过两秒才跳转
-            setTimeout(()=>{
-                this.showCode()
-            },3000)
+            // setTimeout(()=>{
+            //     this.showCode()
+            // },3000)
+            
+            //去判断有没有这个二维码图片
+            let openid = localStorage.getItem('shan_openid');
+            let kechengid = localStorage.getItem('shan_kechengid');
+            let URL = 'http://www.hhfff.cn/api/getQrcode';
+            axios.get(URL,{
+              params:{
+                'openid':openid,
+                'kechengid':kechengid
+              }
+          }).then((response) => {  //箭头函数，上下文穿透，才能用this.$router
+              let res_code = res.code;
+              if (res_code == '000') {
+                  //展示生成的二维码图片
+                  this.showCode()
+              } else if (res_code == '002') {
+                  //参数有误，提示课程暂时无法观看
+                  Message.success('亲，系统繁忙，请稍后再试');
+                  //不跳转
+                  // this.$router.push('/fail');
+                  return false;
+              }
+          })
+          .catch((error) =>{
+              console.log(error);
+          });
         },
         showCode () {
             //去生成 带参的二维码图片
