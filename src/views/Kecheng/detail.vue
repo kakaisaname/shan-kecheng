@@ -34,6 +34,7 @@
 
 <script>
 import axios from 'axios'
+import { Message } from 'element-ui'
 export default {
     name:'detail',
     data () {
@@ -119,15 +120,28 @@ export default {
                 'kechengid':kechengid
               }
           }).then((response) => {  //箭头函数，上下文穿透，才能用this.$router
-              let res_code = res.code;
+              let res_code = response.data.code;
               if (res_code == '000') {
                   //展示生成的二维码图片
                   this.showCode()
               } else if (res_code == '002') {
                   //参数有误，提示课程暂时无法观看
                   Message.success('亲，系统繁忙，请稍后再试');
-                  //不跳转
-                  // this.$router.push('/fail');
+                  //去生成邀请二维码  **
+                //   let createQrcodeUrl = 'http://www.hhfff.cn/api/createQrImage';
+                //   axios.post(createQrcodeUrl,{
+                //       openid:openid,
+                //       kechengid:kechengid
+                //   }).then((res) => {
+                //       let res_code = res.data.code;
+                //     if (res_code == '000') {
+                //         console.log('create qrcode ok')
+                //     } else if (res_code == '002') {
+                //         console.log('create qrcode fail')
+                //     }
+                //   }).catch((error) => {
+                //       console.log(error);
+                //   })
                   return false;
               }
           })
@@ -141,6 +155,21 @@ export default {
         },
         hiddenCode () {
             this.$refs.qrs.style.display="none"
+        },
+        //购买视频  调起微信支付
+        buy () {
+            //1、判断用户的微信版本 是不是大于5.0  只有5.0版本才能进行微信支付
+            let ua=navigator.userAgent.toLowerCase();
+            let v_weixin = ua.split('micromessenger')[1].substring(1,6).split(' ')[0];  
+            if(v_weixin.split('.').length == 2){  
+                v_weixin = v_weixin + '.0';  
+            }  
+            if(v_weixin < '5.0'){  
+               Message.error('您的微信版本低于5.0，请尽快升级');  
+            }else{  
+               //开始调用微信支付
+               Message.success('接下来支付开发');
+            }  
         }
     }
 }
