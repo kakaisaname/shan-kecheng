@@ -98,6 +98,17 @@ export default {
         this.qrcodeImg = 'http://118.24.61.194:8089/qrcode/'+this.openid+'_'+this.kechengid+'.jpg';
         this.playerOptions.sources[0].src = localStorage.getItem('shan_vediourl',vediourl);
     },
+    mounted () {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', '', false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', '');
+                document.attachEvent('onWeixinJSBridgeReady', '');
+            }
+        } else {
+        }
+    },
     methods: {
         showTips () {
             this.$refs.share.style.display="inline";
@@ -168,9 +179,74 @@ export default {
                Message.error('您的微信版本低于5.0，请尽快升级');  
             }else{  
                //开始调用微信支付
-               Message.success('接下来支付开发');
+               let openid = localStorage.getItem('shan_openid')
+               let kechengid = localStorage.getItem('shan_kechengid');
+               let buyUrl = 'http://www.hhfff.cn/api/buyKecheng'
+               axios.post(buyUrl,{
+                   openid:openid,
+                   kechengid:kechengid
+               }).then((response) => {
+                   console.log(response)
+                   let obj = JSON.parse(response);
+                   this.callpay()
+               })
             }  
-        }
+        },
+        callpay (obj) {
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            } else {
+                this.jsApiCall(obj);
+            }
+        },
+       jsApiCall(obj) {
+            WeixinJSBridge.invoke('getBrandWCPayRequest',obj, function(res) {
+                    var msg = res.err_msg;
+                    if (msg == "get_brand_wcpay_request:ok") {
+                           //支付成功，应该是刷新页面
+                           let share = localStorage.getItem('shan_share');
+                           let imgurl = localStorage.getItem('shan_imgurl');
+                           let tips = localStorage.getItem('shan_tips');
+                           let openid = localStorage.getItem('shan_openid');
+                           let kechengid = localStorage.getItem('shan_kechengid');
+                           let video_url = localStorage.getItem('shan_vediourl');
+                           this.$router.push({  
+                                path: '/detail',   
+                                name: 'detail',  
+                                params: {   
+                                    isbuy: 1,                   //已经购买了，不为0
+                                    isshare: share,    
+                                    img: imgurl,
+                                    tips: tips,
+                                    vediourl: video_url,
+                                    kechengid: kechengid,
+                                    openid: openid
+                                }
+                            }) 
+                    } else {
+                        if (msg == "get_brand_wcpay_request:cancel") {
+                            //var err_msg = "您取消了微信支付";  不跳转
+                            Message.error('您取消了微信支付');
+                            return false;
+                        } else if (res.err_code == 3) {
+                                //var err_msg = "您正在进行跨号支付<br/>正在为您转入扫码支付......";
+                        } else if (msg == "get_brand_wcpay_request:fail") {
+                                //var err_msg = "微信支付失败<br/>错误信息：" + res.err_desc;
+                                Message.error('微信支付失败')
+                        } else {
+                                //var err_msg = msg + "<br/>" + res.err_desc;
+                        }    
+                           // show_notice(err_msg);
+                        }
+
+            }
+            );
+      }
     }
 }
 </script>
