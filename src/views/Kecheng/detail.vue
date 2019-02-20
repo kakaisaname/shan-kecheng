@@ -187,8 +187,11 @@ export default {
                    kechengid:kechengid
                }).then((response) => {
                    console.log(response)
-                   let obj = JSON.parse(response);
-                   this.callpay()
+                   let obj = JSON.parse(response.data);
+                   this.callpay(obj)
+               }).catch((error)=>{
+                   console.log(error)
+                   Message.error('暂时无法购买，请尽情期待！') 
                })
             }  
         },
