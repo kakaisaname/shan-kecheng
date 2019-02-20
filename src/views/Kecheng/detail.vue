@@ -186,6 +186,7 @@ export default {
                    openid:openid,
                    kechengid:kechengid
                }).then((response) => {
+                   alert(45)
                    console.log(response.data)
                    console.log(555)
                    let obj = response.data;
