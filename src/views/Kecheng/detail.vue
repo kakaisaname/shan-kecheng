@@ -186,8 +186,8 @@ export default {
                    openid:openid,
                    kechengid:kechengid
                }).then((response) => {
-                   console.log(response)
-                   let obj = JSON.parse(response.data);
+                   console.log(response.data)
+                   let obj = response.data;
                    this.callpay(obj)
                }).catch((error)=>{
                    console.log(error)
@@ -198,10 +198,10 @@ export default {
         callpay (obj) {
             if (typeof WeixinJSBridge == "undefined") {
                 if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    document.addEventListener('WeixinJSBridgeReady', this.jsApiCall(obj), false);
                 } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('WeixinJSBridgeReady', this.jsApiCall(obj));
+                    document.attachEvent('onWeixinJSBridgeReady', this.jsApiCall(obj));
                 }
             } else {
                 this.jsApiCall(obj);
