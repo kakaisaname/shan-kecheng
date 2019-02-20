@@ -187,6 +187,7 @@ export default {
                    kechengid:kechengid
                }).then((response) => {
                    console.log(response.data)
+                   console.log(555)
                    let obj = response.data;
                    this.callpay(obj)
                }).catch((error)=>{
