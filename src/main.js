@@ -44,7 +44,7 @@ router.beforeEach(( to, from, next ) => {
   }
   next()
   if (to.name == 'empty') {
-    let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+    let wechatopenid = localStorage.getItem('new_shan_wechat_oauth_openid');
     if (typeof(wechatopenid) == "undefined" || !wechatopenid) {//如果没有token,则让它授权 
       //保存当前路由地址，授权后还会跳到此地址
       //授权请求,并跳转http://www.hhfff.cn/oauth2.php路由页面
