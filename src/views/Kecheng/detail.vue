@@ -182,7 +182,6 @@ export default {
                let openid = localStorage.getItem('shan_openid');
                let kechengid = localStorage.getItem('shan_kechengid');
                let buyUrl = 'http://www.hhfff.cn/api/buyKecheng'
-               Message.success(openid)
                axios.post(buyUrl,{
                    openid:openid,
                    kechengid:kechengid
