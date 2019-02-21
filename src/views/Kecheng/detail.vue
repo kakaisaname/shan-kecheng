@@ -186,7 +186,7 @@ export default {
                    openid:openid,
                    kechengid:kechengid
                }).then((response) => {
-                   Message.success('您正在支付')
+                //    Message.success('您正在支付')
                 //    console.log(response.data)
                    let obj = response.data;
                    this.callpay(obj)
