@@ -189,7 +189,6 @@ export default {
                    Message.success('您正在支付')
                 //    console.log(response.data)
                    let obj = response.data;
-                   alert(obj)
                    this.callpay(obj)
                }).catch((error)=>{
                    console.log(error)
