@@ -179,9 +179,10 @@ export default {
                Message.error('您的微信版本低于5.0，请尽快升级');  
             }else{  
                //开始调用微信支付
-               let openid = localStorage.getItem('shan_openid')
+               let openid = localStorage.getItem('shan_openid');
                let kechengid = localStorage.getItem('shan_kechengid');
                let buyUrl = 'http://www.hhfff.cn/api/buyKecheng'
+               Message.success(openid)
                axios.post(buyUrl,{
                    openid:openid,
                    kechengid:kechengid
