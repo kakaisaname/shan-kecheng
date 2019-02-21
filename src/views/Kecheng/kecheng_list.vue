@@ -84,7 +84,7 @@ export default {
           //应该是跳转到一个页面 vue 
           // window.location.href = img_url
           //先通过课程和openid获取是否分享和是否购买
-          let openid = localStorage.getItem("shan_wechat_oauth_openid")
+          let openid = localStorage.getItem("new_shan_wechat_oauth_openid")
           let URL = 'http://www.hhfff.cn/api/getIsBuySharedByOpenid'    
           axios.get(URL,{
               params:{

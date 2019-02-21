@@ -27,7 +27,7 @@ export default {
                 let res_code = res.code;
                 if (res_code == '000') {
                     //将openid 存储在本地
-                    localStorage.setItem("shan_wechat_oauth_openid",res.data.openid);
+                    localStorage.setItem("new_shan_wechat_oauth_openid",res.data.openid);
                     //跳转到答题页 
                     this.$router.push('/list');
                 } else if (res_code == '002' || res_code == '003') {
