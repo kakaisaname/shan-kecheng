@@ -212,7 +212,8 @@ export default {
             WeixinJSBridge.invoke('getBrandWCPayRequest',obj, function(res) {
                     var msg = res.err_msg;
                     if (msg == "get_brand_wcpay_request:ok") {
-                           //支付成功，应该是刷新页面
+
+                           //支付成功，刷新页面,显示播放
                            let share = localStorage.getItem('shan_share');
                            let imgurl = localStorage.getItem('shan_imgurl');
                            let tips = localStorage.getItem('shan_tips');

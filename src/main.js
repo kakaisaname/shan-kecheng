@@ -16,6 +16,7 @@ import {
   createAPI
 } from 'cube-ui'
 import SubscribeDialog from '@/components/subscribe-dialog/subscribe-dialog'
+import { Message } from 'element-ui';
 // import GongzonghaoDialog from '@/components/share-dialog/gongzonghao-dialog'
 createAPI(Vue, SubscribeDialog, [], true)
 // createAPI(Vue, GongzonghaoDialog, [], true)
@@ -44,17 +45,19 @@ router.beforeEach(( to, from, next ) => {
   }
   next()
   if (to.name == 'empty') {
-    let wechatopenid = localStorage.getItem('new_shan_wechat_oauth_openid');
-    if (typeof(wechatopenid) == "undefined" || !wechatopenid) {//如果没有token,则让它授权 
-      //保存当前路由地址，授权后还会跳到此地址
-      //授权请求,并跳转http://www.hhfff.cn/oauth2.php路由页面
-      window.location.href = 'http://www.hhfff.cn/kecheng_oauth.php';
-    } else {
-      //不用授权了
-      //跳转到答题页 
-      router.push('/list');
-      // this.$router.push('/list');
-    }
+    // let wechatopenid = localStorage.getItem('new_shan_wechat_oauth_openid');
+    window.location.href = 'http://www.hhfff.cn/kecheng_oauth.php';
+    // router.push('/list');
+    // if (typeof(wechatopenid) == "undefined" || !wechatopenid) {//如果没有token,则让它授权 
+    //   //保存当前路由地址，授权后还会跳到此地址
+    //   //授权请求,并跳转http://www.hhfff.cn/oauth2.php路由页面
+    //   window.location.href = 'http://www.hhfff.cn/kecheng_oauth.php';
+    // } else {
+    //   //不用授权了
+    //   //跳转到答题页 
+    //   router.push('/list');
+    //   // this.$router.push('/list');
+    // }
   } else {
     next();
   }
